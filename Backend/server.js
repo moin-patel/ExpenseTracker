@@ -1,70 +1,20 @@
-// require("dotenv").config();
-// const express = require("express");
-// const cors = require("cors");
-// const path = require("path");
-
-// const connectionDB = require("./config/db");
-
-// const authRoutes = require("./routes/authRoutes");
-// const incomeRoutes = require("./routes/incomeRoutes");
-// const expenseRoutes = require("./routes/expenseRoutes");
-// const dashboardRoutes = require("./routes/dashboardRoutes");
-
-
-// const app = express();
-
-// // 🔹 CONNECT DB FIRST
-// connectionDB();
-
-// // 🔹 MIDDLEWARE
-// app.use(
-//   cors({
-//     origin: process.env.CLIENT_URL || "*",
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   }),
-// );
-
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-
-// // 🔹 ROUTES
-// app.use("/api/v1/auth", authRoutes);
-// app.use("/api/v1/income", incomeRoutes);
-// app.use("/api/v1/expense", expenseRoutes);
-// app.use("/api/v1/dashboard", dashboardRoutes);
-
-// // 🔹 STATIC FILES
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-
-// // 🔹 TEST ROUTE
-// app.get("/", (req, res) => {
-//   res.send("Server is running 🚀");
-// });
-
-// // 🔹 START SERVER
-// const PORT = process.env.PORT || 8000;
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
 const connectionDB = require("./config/db");
+
 const authRoutes = require("./routes/authRoutes");
 const incomeRoutes = require("./routes/incomeRoutes");
 const expenseRoutes = require("./routes/expenseRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 
-const app = express();
 
+const app = express();
 
 // 🔹 CONNECT DB FIRST
 connectionDB();
-
 
 // 🔹 MIDDLEWARE
 app.use(
@@ -72,50 +22,100 @@ app.use(
     origin: process.env.CLIENT_URL || "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  }),
 );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-// 🔹 API ROUTES
+// 🔹 ROUTES
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/income", incomeRoutes);
 app.use("/api/v1/expense", expenseRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
 
-
-// 🔹 UPLOADS STATIC FILES
+// 🔹 STATIC FILES
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 
-// 🔹 SERVE FRONTEND BUILD
-app.use(
-  express.static(
-    path.join(__dirname, "../Frontend/dist")
-  )
-);
-
-
-// 🔹 FRONTEND ROUTING
-app.use((req, res) => {
-  res.sendFile(
-    path.resolve(
-      __dirname,
-      "../Frontend/dist/index.html"
-    )
-  );
-});
 // 🔹 TEST ROUTE
-app.get("/api/test", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Server is running 🚀");
 });
 
-
 // 🔹 START SERVER
 const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+
+// require("dotenv").config();
+// const express = require("express");
+// const cors = require("cors");
+// const path = require("path");
+
+// const connectionDB = require("./config/db");
+// const authRoutes = require("./routes/authRoutes");
+// const incomeRoutes = require("./routes/incomeRoutes");
+// const expenseRoutes = require("./routes/expenseRoutes");
+// const dashboardRoutes = require("./routes/dashboardRoutes");
+
+// const app = express();
+
+
+// // 🔹 CONNECT DB FIRST
+// connectionDB();
+
+
+// // 🔹 MIDDLEWARE
+// app.use(
+//   cors({
+//     origin: process.env.CLIENT_URL || "*",
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+
+// // 🔹 API ROUTES
+// app.use("/api/v1/auth", authRoutes);
+// app.use("/api/v1/income", incomeRoutes);
+// app.use("/api/v1/expense", expenseRoutes);
+// app.use("/api/v1/dashboard", dashboardRoutes);
+
+
+// // 🔹 UPLOADS STATIC FILES
+// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+
+// // 🔹 SERVE FRONTEND BUILD
+// app.use(
+//   express.static(
+//     path.join(__dirname, "../Frontend/dist")
+//   )
+// );
+
+
+// // 🔹 FRONTEND ROUTING
+// app.use((req, res) => {
+//   res.sendFile(
+//     path.resolve(
+//       __dirname,
+//       "../Frontend/dist/index.html"
+//     )
+//   );
+// });
+// // 🔹 TEST ROUTE
+// app.get("/api/test", (req, res) => {
+//   res.send("Server is running 🚀");
+// });
+
+
+// // 🔹 START SERVER
+// const PORT = process.env.PORT || 8000;
+
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
