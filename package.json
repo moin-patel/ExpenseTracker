@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-      "scripts": {
-    "dev": "nodemon server.js",
-    "build": "npm install --prefix ../Frontend/ExpenseTrack && npm run build --prefix ../Frontend/ExpenseTrack",
-    "start": "node server.js"
+  "scripts": {
+    "dev": "nodemon backend/server.js",
+    "build": "npm install  && npm install --prefix Frontend && npm run build --prefix Frontend",
+    "start": "node backend/server.js"
   },
   "keywords": [],
   "author": "",

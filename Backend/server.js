@@ -93,7 +93,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // 🔹 SERVE FRONTEND BUILD
 app.use(
   express.static(
-    path.join(__dirname, "../Frontend/ExpenseTrack/dist")
+    path.join(__dirname, "../Frontend/dist")
   )
 );
 
@@ -103,11 +103,10 @@ app.use((req, res) => {
   res.sendFile(
     path.resolve(
       __dirname,
-      "../Frontend/ExpenseTrack/dist/index.html"
+      "../Frontend/dist/index.html"
     )
   );
 });
-
 // 🔹 TEST ROUTE
 app.get("/api/test", (req, res) => {
   res.send("Server is running 🚀");
