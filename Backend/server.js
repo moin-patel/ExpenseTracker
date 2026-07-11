@@ -98,17 +98,15 @@ app.use(
 );
 
 
-// 🔹 FRONTEND ROUTING SUPPORT
+// 🔹 FRONTEND ROUTING
 app.use((req, res) => {
   res.sendFile(
     path.resolve(
       __dirname,
-      "../Frontend/ExpenseTrack/dist",
-      "index.html"
+      "../Frontend/ExpenseTrack/dist/index.html"
     )
   );
 });
-
 
 // 🔹 TEST ROUTE
 app.get("/api/test", (req, res) => {
