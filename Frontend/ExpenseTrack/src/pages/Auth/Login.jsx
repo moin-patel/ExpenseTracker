@@ -113,6 +113,7 @@ import { validateEmail } from "../../utils/helper";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import { UserContext } from "../../context/UserContext";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -149,12 +150,15 @@ const Login = () => {
         localStorage.setItem("token", token);
         updateUser(user);
         navigate("/dashboard");
+        toast.success("login successfull");
+      
       }
     } catch (err) {
       if (err.response?.data?.message) {
         setError(err.response.data.message);
       } else {
         setError("Something went wrong");
+        toast.success("somthing went wrong , please try again later ");
       }
     }
   };

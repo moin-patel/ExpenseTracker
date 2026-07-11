@@ -1,49 +1,7 @@
-// import React from "react";
-// import {
-//   BrowserRouter as Router,
-//   Routes,
-//   Route,
-//   Navigate,
-// } from "react-router-dom";
 
-// import Login from "./pages/Auth/Login";
-// import SignUp from "./pages/Auth/SignUp";
-// import Home from "./pages/dashboard/Home";
-// import Expense from "./pages/dashboard/Expense";
-// import Income from "./pages/dashboard/Income";
-// import UserProvider from "./context/UserContext";
-
-// export default function App() {
-//   return (
-//     <UserProvider>
-//     <div>
-//       <Routes>
-//         <Route path="/" element={<Root />} />
-//         <Route path="/login" element={<Login />} />
-//         <Route path="/signup" element={<SignUp />} />
-//         <Route path="/dashboard" element={<Home />} />
-//         <Route path="/expense" element={<Expense />} />
-//         <Route path="/income" element={<Income />} />
-//       </Routes>
-//     </div>
-//     </UserProvider>
-//   );
-// }
-
-// const Root = () => {
-//   // check if user is authenticated
-//   const isAuthenticated = !!localStorage.getItem("token");
-//   // redirect based on authentication status
-//   return isAuthenticated ? (
-//     <Navigate to="/dashboard" />
-//   ) : (
-//     <Navigate to="/login" />
-//   );
-// };
 
 import React from "react";
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -54,21 +12,43 @@ import SignUp from "./pages/Auth/SignUp";
 import Home from "./pages/dashboard/Home";
 import Expense from "./pages/dashboard/Expense";
 import Income from "./pages/dashboard/Income";
+import UpdateProfile from "./pages/dashboard/UpdateProfile";
+
 import UserProvider from "./context/UserProvider";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   return (
     <UserProvider>
       <div>
         <Routes>
+          {/* Root */}
           <Route path="/" element={<Root />} />
+
+          {/* Authentication */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+
+          {/* Dashboard */}
           <Route path="/dashboard" element={<Home />} />
-          <Route path="/expense" element={<Expense />} />
           <Route path="/income" element={<Income />} />
+          <Route path="/expense" element={<Expense />} />
+          <Route path="/updateProfile" element={<UpdateProfile />} />
         </Routes>
       </div>
+
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          className: "text-sm font-medium",
+          style: {
+            fontSize: "13px",
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        }}
+      />
     </UserProvider>
   );
 }
@@ -77,8 +57,8 @@ const Root = () => {
   const isAuthenticated = !!localStorage.getItem("token");
 
   return isAuthenticated ? (
-    <Navigate to="/dashboard" />
+    <Navigate to="/dashboard" replace />
   ) : (
-    <Navigate to="/login" />
+    <Navigate to="/login" replace />
   );
 };

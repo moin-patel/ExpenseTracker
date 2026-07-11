@@ -8,13 +8,14 @@ import {
   Legend,
 } from "recharts";
 import CustomToolTip from "./CustomToolTip";
+import CustomLegend from "./CustomLegend";
 
 const CustomPieChart = ({
-  data = [],
-  colors = [],
-  showTextAnchor = false,
-  label = "",
-  totalAmount = "",
+  data ,
+  colors ,
+  showTextAnchor,
+  label,
+  totalAmount 
 }) => {
   // Safety check – agar data nahi hai to empty chart na bane
   if (!data.length) {
@@ -42,21 +43,21 @@ const CustomPieChart = ({
           {data.map((entry, index) => (
             <Cell
               key={`cell-${index}`}
-              fill={colors[index % colors.length] || "#8884d8"}
+              fill={colors[index % colors.length]}
             />
           ))}
         </Pie>
 
         {/* FIXED TOOLTIP */}
         <Tooltip content={<CustomToolTip />} />
-        <Legend />
+        <Legend content={<CustomLegend/>} />
 
         {showTextAnchor && (
           <>
             <text
               x="50%"
               y="50%"
-              dy={-20}
+              dy={-25}
               textAnchor="middle"
               fill="#666"
               fontSize="14"
@@ -69,8 +70,8 @@ const CustomPieChart = ({
               dy={10}
               textAnchor="middle"
               fill="#333"
-              fontSize="22"
-              fontWeight="600"
+              fontSize="24px"
+              fontWeight="semi-bold"
             >
               {totalAmount}
             </text>

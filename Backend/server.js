@@ -36,6 +36,7 @@ app.use("/api/v1/dashboard", dashboardRoutes);
 // 🔹 STATIC FILES
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+
 // 🔹 TEST ROUTE
 app.get("/", (req, res) => {
   res.send("Server is running 🚀");

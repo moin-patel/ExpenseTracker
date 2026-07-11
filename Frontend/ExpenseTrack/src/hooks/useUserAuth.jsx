@@ -1,3 +1,5 @@
+
+
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
@@ -9,31 +11,30 @@ export const useUserAuth = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Agar user already context me hai to dobara API call mat karo
     if (user) return;
-
-    let isMounted = true;
 
     const fetchUserInfo = async () => {
       try {
-        const response = await axiosInstance.get(API_PATHS.AUTH.GET_USER_INFO);
+        const { data } = await axiosInstance.get(
+          API_PATHS.AUTH.GET_USER_INFO
+        );
 
-        if (isMounted && response.data) {
-          updateUser(response.data);
-        }
+        // Context me latest user save karo
+        updateUser(data);
       } catch (error) {
-        console.error("Failed to fetch user info:", error);
+        console.log("Authentication Error:", error);
 
-        if (isMounted) {
-          clearUser();
-          navigate("/login");
-        }
+        // Invalid token ya login nahi hai
+        localStorage.removeItem("token");
+        clearUser();
+
+        navigate("/login");
       }
     };
 
     fetchUserInfo();
-
-    return () => {
-      isMounted = false;
-    };
   }, [user, updateUser, clearUser, navigate]);
+
+  return user;
 };
