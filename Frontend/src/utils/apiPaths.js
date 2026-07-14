@@ -1,6 +1,6 @@
 // utils/apiPaths.js
 
-export const BASE_URL = "http://localhost:8000";
+export const BASE_URL = "https://expensetracker-1-5pwr.onrender.com";
 
 export const API_PATHS = {
   AUTH: {
